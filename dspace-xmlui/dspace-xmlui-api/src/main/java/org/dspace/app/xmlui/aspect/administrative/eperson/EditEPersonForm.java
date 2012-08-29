@@ -140,7 +140,9 @@ public class EditEPersonForm extends AbstractDSpaceTransformer
     private static final Message T_telephone =
     	message("xmlui.EPerson.EditProfile.telephone");
     
-    
+        //netid allow to handle automtic single sign on login
+    private static final Message T_netid =
+    	message("xmlui.EPerson.EditProfile.netid");
     
 
     	
@@ -184,6 +186,7 @@ public class EditEPersonForm extends AbstractDSpaceTransformer
 		String firstValue = eperson.getFirstName();
 		String lastValue  = eperson.getLastName();
 		String phoneValue = eperson.getMetadata("phone");
+		String netidValue=eperson.getNetid();
 		boolean canLogInValue = eperson.canLogIn();
 		boolean certificatValue = eperson.getRequireCertificate();
 		java.util.List<String> deleteConstraints = eperson.getDeleteConstraints();
@@ -204,7 +207,10 @@ public class EditEPersonForm extends AbstractDSpaceTransformer
         {
             phoneValue = request.getParameter("phone");
         }
-		
+				if (request.getParameter("netid") != null)
+		{
+			netidValue = request.getParameter("netid");
+		}
 		
 		
 		// DIVISION: eperson-edit
@@ -275,7 +281,21 @@ public class EditEPersonForm extends AbstractDSpaceTransformer
         	identity.addLabel(T_last_name);
         	identity.addItem(lastValue);
         }
+         if ("true".equals(ConfigurationManager.getProperty("webui.cas.enable")))
+        {
+			if (admin) {
+				Text netid = identity.addItem().addText("netid");
+				netid.setLabel(T_netid);
+				netid.setValue(netidValue);
+			}
+			else
+	        {
+	        	identity.addLabel(T_netid);
+	        	identity.addItem(netidValue);
+	        }
+        }
         
+
         if (admin)
         {
 	        Text phone = identity.addItem().addText("phone");

@@ -67,7 +67,12 @@
             <artifactId>yuicompressor</artifactId>
             <version>2.3.6</version>
         </dependency>
-
+        <!-- Dauphine -->
+        <dependency>
+           <groupId>cas</groupId>
+           <artifactId>casclient</artifactId>
+           <version>2.1.1</version>
+       </dependency>
     </dependencies>
 
 </project>

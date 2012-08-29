@@ -250,12 +250,19 @@
             <groupId>org.databene</groupId>
             <artifactId>contiperf</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>org.rometools</groupId>
             <artifactId>rome-modules</artifactId>
             <version>1.0</version>
         </dependency>
+                <!--  Dauphine -->
+        <dependency>
+           <!-- type>jar</type-->
+           <groupId>cas</groupId>
+           <artifactId>casclient</artifactId>
+           <version>2.1.1</version>
+       </dependency>
     </dependencies>
 
 </project>
